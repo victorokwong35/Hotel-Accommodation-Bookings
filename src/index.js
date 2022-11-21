@@ -4,7 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// header("Access-Control-Allow-Origin:   *");
+// header("Access-Control-Allow-Origin:   POST, GET, OPTIONS, PUT, DELETE");
+// header(
+//   "Access-Control-Allow-Origin:   Content-Type, X-Auth-Token, Origin, Authorization"
+// );
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <App />
