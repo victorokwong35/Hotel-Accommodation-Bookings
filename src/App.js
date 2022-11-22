@@ -13,6 +13,9 @@ function App() {
           round="100px"
         />
       </header>
+      <div className="pleaseClick">
+        <p>Please click the boxes to display individual halls data from API</p>
+      </div>
 
       <div className="select__Room--container">
         <DataFetchJson />

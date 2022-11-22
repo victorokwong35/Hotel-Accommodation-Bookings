@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { useState } from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
@@ -16,16 +15,27 @@ export default function DataFetch() {
 
   const [roomToBook, setRoomToBook] = useState(null);
   const [modal, setModal] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [isRoomAvailable, setIsRoomAvailable] = useState(false);
+  const [active, setActive] = useState(false);
+
+  const activeToggle = () => {
+    setActive(true);
+  };
 
   const openModal = (room) => {
     setRoomToBook(room);
     setModal(true);
   };
 
+  const successModal = (room) => {
+    setSuccess(true);
+  };
+
   const closeModal = () => {
     setRoomToBook(null);
     setModal(false);
+    setSuccess(false);
   };
 
   const confirmRoom = () => {
@@ -46,6 +56,8 @@ export default function DataFetch() {
       .catch((err) => {
         console.log(err);
       });
+    setModal(false);
+    successModal();
   };
 
   //mockaccommodation.tranzgate.com.ng/api/halls
@@ -109,7 +121,7 @@ export default function DataFetch() {
     <div className="Floor--container">
       <div className="navBar">
         <h3>{hall1data.hallId} Hall</h3>
-        <p>5 rooms available</p>
+        <p>List of {hall1data.hallName} floors and rooms available</p>
       </div>
       <div>
         {hall1data.floor.map((room, index) => {
@@ -137,6 +149,7 @@ export default function DataFetch() {
                       rooms.spacesLeft === 0 ? false : openModal(rooms)
                     }
                   >
+                    {/* <div className="activeClick"></div> */}
                     <h5>{rooms.roomNo}</h5>
                     <h6>({rooms.spacesLeft})</h6>
                   </div>
@@ -153,7 +166,7 @@ export default function DataFetch() {
     <div className="Floor--container">
       <div className="navBar">
         <h3>{hall2data.hallId} Hall</h3>
-        <p>5 rooms available</p>
+        <p>List of {hall2data.hallName} floors and rooms available</p>
       </div>
       <div>
         {hall2data.floor.map((room, index) => {
@@ -209,6 +222,13 @@ export default function DataFetch() {
           <Button onClick={confirmRoom}>Confirm Booking</Button>
           <Button onClick={closeModal}>Cancel Booking</Button>
         </div>
+      </Dialog>
+
+      <Dialog onClose={closeModal} open={success} maxWidth="md">
+        <DialogTitle>
+          <h4>Congratulations, Your room has been successfully booked.</h4>
+          <Button onClick={closeModal}>Continue</Button>
+        </DialogTitle>
       </Dialog>
     </div>
   );
