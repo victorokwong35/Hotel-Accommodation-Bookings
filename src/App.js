@@ -1,11 +1,12 @@
 import "./App.css";
 import Avatar from "react-avatar";
-import DataFetchJson from "./DataFetchJson";
+import DataFetch from "./DataFetch";
 
 function App() {
   return (
     <div className="App">
       <header className="App__Header">
+        <span>Victor Okwong</span>
         <Avatar
           className="avatar"
           githubHandle="victorokwong35"
@@ -18,7 +19,7 @@ function App() {
       </div>
 
       <div className="select__Room--container">
-        <DataFetchJson />
+        <DataFetch />
       </div>
     </div>
   );
